@@ -1,23 +1,28 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-function CharContainer() {
+export default function CharContainer(props) {
+  const [chars, setChars] = useState([]);
 
-    useEffect(()=> {
-        axios.get ('https://swapi.co/api/people')
-             .then((response) => {
-                 console.log("Char works", response);
-             })
+  useEffect(() => {
+    axios
+      .get(`https://swapi.co/api/people`)
+      .then(res => setChars(res.data.results))
+      .catch(err => console.log("i am error", err));
+  }, []);
 
-             .catch((error) => console.log("oh, crap", error));
-    }, []);
+  console.log("im chars", chars);
 
-
-    return(
-        <div>
-            Welcome to Sunday Support Hours!
+  return (
+    <div className="container">
+    {chars.map((item,index,array) => (
+        <div className="card">
+        <h1>{item.name}</h1>
+        <p>height:{item.height}</p>
+        <p>mass: {item.mass}</p>
         </div>
-    )
+    ))}
+     
+    </div>
+  );
 }
-
-export default CharContainer;
