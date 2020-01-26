@@ -1,11 +1,11 @@
 import React from "react";
-
+import CharContainer from "./components/CharContainer";
 import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <h1>welcome too sunday support hours</h1>
+      <CharContainer/>
     </div>
   );
 }
